@@ -1,0 +1,81 @@
+
+   - name: Install Elastic Search, Kibana, and Logstash (Ubuntu)
+     apt:
+       name:
+         - elasticsearch
+         - kibana
+         - logstash
+
+   - name: Configuration of Elastic Search (Ubuntu)
+     copy:
+       src: elasticsearch.yml
+       dest: /etc/elasticsearch
+       mode: 777
+       owner: root
+       group: root
+
+   - name: Start and Enable the Elastic Stack services (Ubuntu)
+     systemd:
+       name: "{{name}}"
+       state: restarted
+       enabled: true
+     loop:
+       - elasticsearch
+       - kibana
+       - logstash
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

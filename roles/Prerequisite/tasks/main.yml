@@ -1,0 +1,85 @@
+
+   - name: Install Prerequisites (Ubuntu)
+     apt:
+       name:
+         - openjdk-11-jdk
+         - apt-transport-https
+         - software-properties-common
+         - curl
+       state: present
+     when: ansible_distribution == "Ubuntu"
+
+   - name: Install Prerequisites (CentOS)
+     yum:
+       name:
+         - java-1.8.0.-openjdk
+         - epel-release
+       state: present
+     when: ansible_distribution == "CentOS"
+
+   - name: Adding Elastic Stack Repository Key (Ubuntu)
+     apt_key:
+       url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+     when: ansible_distribution == "Ubuntu"
+
+   - name: Adding Elastic Stack Repository Key (CentOS)
+     rpm_key:
+       key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+     when: ansible_distribution == "CentOS"
+
+   - name: Adding the APT Repository of Elastic Stack (Ubuntu)
+     apt_repository:
+       repo: "deb https://artifacts.elastic.co/packages/7.x/apt stable main"
+       state: present
+
+   - name: Adding the YUM Repository of Elastic Stack (CentOS)
+     yum_repository:
+       name: Elastic Stack
+       description: Elastic Stack Yum Repo
+       baseurl: https://artifacts.elastic.co/packages/7.x/yum
+       state: present
+
+   - name: Reloading Packages via Update (Ubuntu)
+     apt:
+       upgrade: dist
+       update_cache: yes
+     when: ansible_distribution == "Ubuntu"
+
+   - name: Reloading Packages via Update (CentOS)
+     yum:
+       update_only: yes
+       update_cache: yes
+     when: ansible_distribution == "CentOS"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
