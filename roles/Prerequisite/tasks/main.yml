@@ -31,6 +31,7 @@
      apt_repository:
        repo: "deb https://artifacts.elastic.co/packages/7.x/apt stable main"
        state: present
+     when: ansible_distribution == "Ubuntu"
 
    - name: Adding the YUM Repository of Elastic Stack (CentOS)
      yum_repository:
@@ -38,6 +39,7 @@
        description: Elastic Stack Yum Repo
        baseurl: https://artifacts.elastic.co/packages/7.x/yum
        state: present
+     when: ansible_distribution == "CentOS"
 
    - name: Reloading Packages via Update (Ubuntu)
      apt:
