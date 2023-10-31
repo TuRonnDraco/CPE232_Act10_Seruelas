@@ -3,6 +3,7 @@
      apt:
        name:
          - openjdk-11-jdk
+         - openjdk-8-jre
          - apt-transport-https
          - software-properties-common
          - curl
@@ -12,8 +13,9 @@
    - name: Install Prerequisites (CentOS)
      yum:
        name:
-         - java-1.8.0.-openjdk
+         - java-1.8.0-openjdk
          - epel-release
+         - curl
        state: present
      when: ansible_distribution == "CentOS"
 
@@ -35,9 +37,11 @@
 
    - name: Adding the YUM Repository of Elastic Stack (CentOS)
      yum_repository:
-       name: Elastic Stack
-       description: Elastic Stack Yum Repo
+       name: Elastic-Stack
+       description: Elastic-Stack-Yum-Repo
        baseurl: https://artifacts.elastic.co/packages/7.x/yum
+       gpgcheck: true
+       gpgkey: https://artifacts.elastic.co/GPG-KEY-elasticsearch
        state: present
      when: ansible_distribution == "CentOS"
 

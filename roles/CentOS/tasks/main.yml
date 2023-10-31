@@ -1,26 +1,20 @@
 
-  - name: Install Elastic Search, Kibana, and Logstash (CentOS)
-     apt:
+   - name: Install Elastic Search, Kibana, and Logstash (CentOS)
+     yum:
        name:
          - elasticsearch
          - kibana
          - logstash
 
-   - name: Configuration of Elastic Search (CentOS)
-     copy:
-       src: elasticsearch.yml
-       dest: /etc/elasticsearch
-       mode: 777
-       owner: root
-       group: root
-
    - name: Start and Enable the Elastic Stack services (CentOS)
      systemd:
-       name: "{{name}}"
+       name: "{{ item }}"
        state: restarted
        enabled: true
      loop:
        - elasticsearch
        - kibana
        - logstash
+
+
 
